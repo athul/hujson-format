@@ -1,0 +1,6 @@
+schema = 3
+
+[mod]
+  [mod."github.com/tailscale/hujson"]
+    version = "v0.0.0-20221223112325-20486734a56a"
+    hash = "sha256-q9c2IjwbL0IgYPznVpQP1XT/8lrzH1niI3E+wjNcf5Y="
