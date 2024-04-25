@@ -22,19 +22,13 @@
         in
         rec {
           hjsonapp = callPackage ./. {
-            inherit (gomod2nix.legacyPackages.${system}) buildhjsonapplication;
+            inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
           };
-          packages.dockerContainer = pkgs.dockerTools.buildImage {
+          packages.dockerContainer = pkgs.dockerTools.buildLayeredImage {
             name = "hujson-validator";
             tag = "latest";
             created = "now";
-            copyToRoot = pkgs.buildEnv {
-              name = "base-dir";
-              paths = [
-                hjsonapp
-              ];
-              pathsToLink = [ "/bin" ];
-            };
+            contents = hjsonapp;
             config = {
               Cmd = [ "${hjsonapp}/bin/hujson-validator" ];
               ExposedPorts = {
